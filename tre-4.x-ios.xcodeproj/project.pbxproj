@@ -15,7 +15,6 @@
 		5AEDBA982BD992F60047AA05 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEDBA972BD992F60047AA05 /* Theme.swift */; };
 		5AEDBA9A2BD995250047AA05 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEDBA992BD995250047AA05 /* AuthenticationView.swift */; };
 		5AEDBA9C2BD995510047AA05 /* LoggedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEDBA9B2BD995510047AA05 /* LoggedInView.swift */; };
-		5AEDBA9E2BD997570047AA05 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEDBA9D2BD997570047AA05 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +27,6 @@
 		5AEDBA972BD992F60047AA05 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		5AEDBA992BD995250047AA05 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		5AEDBA9B2BD995510047AA05 /* LoggedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInView.swift; sourceTree = "<group>"; };
-		5AEDBA9D2BD997570047AA05 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +67,6 @@
 				5AEDBA972BD992F60047AA05 /* Theme.swift */,
 				5AEDBA992BD995250047AA05 /* AuthenticationView.swift */,
 				5AEDBA9B2BD995510047AA05 /* LoggedInView.swift */,
-				5AEDBA9D2BD997570047AA05 /* LoginView.swift */,
 			);
 			path = "tre-4.x-ios";
 			sourceTree = "<group>";
@@ -153,7 +150,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AEDBA8A2BD990A90047AA05 /* ContentView.swift in Sources */,
-				5AEDBA9E2BD997570047AA05 /* LoginView.swift in Sources */,
 				5AEDBA9C2BD995510047AA05 /* LoggedInView.swift in Sources */,
 				5AEDBA982BD992F60047AA05 /* Theme.swift in Sources */,
 				5AEDBA8C2BD990A90047AA05 /* Item.swift in Sources */,
