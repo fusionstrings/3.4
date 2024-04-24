@@ -14,7 +14,7 @@ struct AuthenticationView: View {
     var body: some View {
         VStack(spacing: 15) {
             if isLoggedIn {
-                LoggedInView()
+                LoggedInView(userDetails: .placeholder)
             } else {
                 Text("Welcome")
                     .font(Theme.headingFont)
@@ -40,6 +40,8 @@ struct AuthenticationView: View {
     }
 }
 
-#Preview {
-    AuthenticationView()
+struct AuthenticationView_Previews: PreviewProvider {
+    static var previews: some View {
+        AuthenticationView()
+    }
 }
