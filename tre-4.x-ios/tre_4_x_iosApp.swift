@@ -25,7 +25,7 @@ struct tre_4_x_iosApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AuthenticationView()
         }
         .modelContainer(sharedModelContainer)
     }
