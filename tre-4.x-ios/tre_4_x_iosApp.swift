@@ -6,27 +6,15 @@
 //
 
 import SwiftUI
-import SwiftData
 
 @main
 struct tre_4_x_iosApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @StateObject var authViewModel = AuthViewModel()
 
     var body: some Scene {
         WindowGroup {
-            AuthenticationView()
+            ContentView()
+                .environmentObject(authViewModel)
         }
-        .modelContainer(sharedModelContainer)
     }
 }
