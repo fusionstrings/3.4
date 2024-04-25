@@ -11,8 +11,8 @@ import SwiftUI
 
 struct Theme {
     static let primaryColor = Color(red: 1.00, green: 0.36, blue: 0, opacity: 1.0)
-    static let backgroundColor = Color.black
-    static let textColor = Color.white
+    static let backgroundColor = Color.white
+    static let textColor = Color.black
 
     static let headingFont = Font.system(size: 24, weight: .bold, design: .default)
     static let bodyFont = Font.system(size: 14, weight: .regular, design: .default)
