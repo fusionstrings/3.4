@@ -107,15 +107,82 @@ struct PlanDetailView: View {
         .navigationTitle(plan.planType.rawValue)
     }
 }
+/*
+struct AllPlansView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
+    var body: some View {
+        List(authViewModel.availablePlanTypes, id: \.self) { planType in
+            HStack {
+                Text(planType.rawValue)
+                Spacer()
+                if authViewModel.userSubscription.plans.contains(where: { $0.planType == planType && $0.isActive }) {
+                    Button(action: {
+                        // Functionality to handle adding another subscription of the same plan type
+                        let newPhoneNumber = authViewModel.generatePhoneNumber()
+                        authViewModel.addSubscription(planType: planType, phoneNumber: newPhoneNumber)
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(Color.green)
+                    }
+                    .buttonStyle(BorderlessButtonStyle()) // to make sure the button doesn't highlight the entire row
+                } else {
+                    Button(action: {
+                        // Functionality to handle adding the first subscription of this plan type
+                        let newPhoneNumber = authViewModel.generatePhoneNumber()
+                        authViewModel.addSubscription(planType: planType, phoneNumber: newPhoneNumber)
+                    }) {
+                        Text("Subscribe")
+                            .foregroundColor(Color.blue)
+                    }
+                    .buttonStyle(BorderlessButtonStyle())
+                }
+            }
+        }
+        .navigationTitle("Available Plans")
+    }
+}
+
+*/
 
 struct AllPlansView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
         List(authViewModel.availablePlanTypes, id: \.self) { planType in
-            Button("Subscribe to \(planType.rawValue)") {
-                let newPhoneNumber = authViewModel.generatePhoneNumber()
-                authViewModel.addSubscription(planType: planType, phoneNumber: newPhoneNumber)
+            HStack {
+                Text(planType.rawValue)
+                Spacer()
+                
+                // Calculate the count of active subscriptions of this plan type
+                let count = authViewModel.userSubscription.plans.filter { $0.planType == planType && $0.isActive }.count
+                
+                // If already subscribed, show the count and the plus sign
+                if count > 0 {
+                    Button(action: {
+                        // Functionality to handle adding another subscription of the same plan type
+                        let newPhoneNumber = authViewModel.generatePhoneNumber()
+                        authViewModel.addSubscription(planType: planType, phoneNumber: newPhoneNumber)
+                    }) {
+                        HStack {
+                            Text("\(count)")
+                                .foregroundColor(.gray)
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(Color.green)
+                        }
+                    }
+                    .buttonStyle(BorderlessButtonStyle()) // Prevent button from highlighting the entire row
+                } else {
+                    Button(action: {
+                        // Functionality to handle adding the first subscription of this plan type
+                        let newPhoneNumber = authViewModel.generatePhoneNumber()
+                        authViewModel.addSubscription(planType: planType, phoneNumber: newPhoneNumber)
+                    }) {
+                        Text("Subscribe")
+                            .foregroundColor(Color.blue)
+                    }
+                    .buttonStyle(BorderlessButtonStyle())
+                }
             }
         }
         .navigationTitle("Available Plans")
