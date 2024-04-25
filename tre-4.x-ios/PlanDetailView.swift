@@ -16,12 +16,12 @@ struct PlanDetailView: View {
             VStack(alignment: .leading) {
                 // Header
                 Group {
-                    Text("Plan Details")
+                    /*Text("Plan Details")
                         .font(.largeTitle)
-                        .fontWeight(.bold)
+                        .fontWeight(.bold)*/
                     Text("Number: \(plan.phoneNumber)")
                         .font(.title3)
-                        .fontWeight(.medium)
+                        .fontWeight(.bold)
                 }
                 .padding(.bottom)
 
