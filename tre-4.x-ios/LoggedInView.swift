@@ -87,6 +87,7 @@ struct PlanCardView: View {
     }
 }
 
+/*
 struct PlanDetailView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     var plan: TelecomPlan
@@ -107,6 +108,7 @@ struct PlanDetailView: View {
         .navigationTitle(plan.planType.rawValue)
     }
 }
+*/
 /*
 struct AllPlansView: View {
     @EnvironmentObject var authViewModel: AuthViewModel

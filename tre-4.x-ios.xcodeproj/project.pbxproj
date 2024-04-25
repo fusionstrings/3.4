@@ -10,6 +10,7 @@
 		5A1A0E522BD9CF390010CAA3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A0E512BD9CF390010CAA3 /* ContentView.swift */; };
 		5A1A0E542BD9CF710010CAA3 /* LoggedOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A0E532BD9CF710010CAA3 /* LoggedOutView.swift */; };
 		5A1A0E562BDA1F410010CAA3 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A0E552BDA1F410010CAA3 /* AuthViewModel.swift */; };
+		5A1A0E582BDA57990010CAA3 /* PlanDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1A0E572BDA57990010CAA3 /* PlanDetailView.swift */; };
 		5AEDBA882BD990A90047AA05 /* tre_4_x_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEDBA872BD990A90047AA05 /* tre_4_x_iosApp.swift */; };
 		5AEDBA8E2BD990AA0047AA05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AEDBA8D2BD990AA0047AA05 /* Assets.xcassets */; };
 		5AEDBA912BD990AA0047AA05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AEDBA902BD990AA0047AA05 /* Preview Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		5A1A0E512BD9CF390010CAA3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5A1A0E532BD9CF710010CAA3 /* LoggedOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedOutView.swift; sourceTree = "<group>"; };
 		5A1A0E552BDA1F410010CAA3 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		5A1A0E572BDA57990010CAA3 /* PlanDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDetailView.swift; sourceTree = "<group>"; };
 		5AEDBA842BD990A90047AA05 /* tre-4.x-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tre-4.x-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AEDBA872BD990A90047AA05 /* tre_4_x_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tre_4_x_iosApp.swift; sourceTree = "<group>"; };
 		5AEDBA8D2BD990AA0047AA05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				5AEDBA972BD992F60047AA05 /* Theme.swift */,
 				5AEDBA9B2BD995510047AA05 /* LoggedInView.swift */,
 				5A1A0E552BDA1F410010CAA3 /* AuthViewModel.swift */,
+				5A1A0E572BDA57990010CAA3 /* PlanDetailView.swift */,
 			);
 			path = "tre-4.x-ios";
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A1A0E582BDA57990010CAA3 /* PlanDetailView.swift in Sources */,
 				5A1A0E542BD9CF710010CAA3 /* LoggedOutView.swift in Sources */,
 				5AEDBA9C2BD995510047AA05 /* LoggedInView.swift in Sources */,
 				5AEDBA982BD992F60047AA05 /* Theme.swift in Sources */,
