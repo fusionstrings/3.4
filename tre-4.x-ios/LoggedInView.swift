@@ -8,32 +8,29 @@
 
 import SwiftUI
 
-
 struct LoggedInView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    Text("Your Phone Number: \(authViewModel.userSubscription.phoneNumber)")
-                        .font(.title2)
-                        .padding()
-
-                    ForEach(authViewModel.userSubscription.plans, id: \.id) { plan in
-                        NavigationLink(destination: PlanDetailView(plan: plan)) {
-                            PlanCardView(plan: plan)
-                        }
+                    ForEach(authViewModel.userSubscription.plans.filter { $0.isActive }) { plan in
+                        PlanCardView(plan: plan)
                     }
+
+                    Spacer()
+
                     NavigationLink(destination: AllPlansView()) {
                         Text("See All Available Plans")
                             .bold()
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Theme.primaryColor)
+                            .background(Color.orange)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
+                    .padding(.bottom)
                 }
                 .padding()
             }
@@ -49,65 +46,76 @@ struct LoggedInView: View {
 
 struct PlanCardView: View {
     var plan: TelecomPlan
-
+    
     var body: some View {
-        HStack {
-            Image(systemName: "simcard.fill") // This can be replaced with a custom icon
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 30, height: 30)
-                .foregroundColor(Theme.primaryColor)
-            VStack(alignment: .leading) {
-                Text(plan.name)
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundColor(Theme.textColor)
-                Text("Data Used: \(plan.dataUsage) / \(plan.dataLimit)")
-                    .font(.subheadline)
-                    .fontWeight(.regular)
-                    .foregroundColor(Theme.textColor)
+        NavigationLink(destination: PlanDetailView(plan: plan)) {
+            VStack {
+                HStack {
+                    Image(systemName: "simcard.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(Color.orange)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(plan.phoneNumber)
+                            .font(.callout)
+                            .foregroundColor(.gray)
+                        Text(plan.name)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                        Text("Data Used: \(plan.dataUsage) / \(plan.dataLimit)")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+                    Spacer()
+                    if plan.isActive {
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
+                    } else {
+                        Text("Inactive")
+                            .foregroundColor(.red)
+                    }
+                }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(8)
+                .shadow(radius: 1)
             }
-            Spacer()
-            Image(systemName: "chevron.right")
+            .padding(.horizontal)
         }
-        .padding()
-        .background(Color.gray.opacity(0.1))
-        .cornerRadius(8)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Theme.textColor, lineWidth: 2)
-        )
     }
 }
 
 struct PlanDetailView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     var plan: TelecomPlan
-
+    
     var body: some View {
-        Text("Details for \(plan.name)")
-            .navigationTitle(plan.planType.rawValue)
+        VStack {
+            Text("Details for \(plan.name)")
+            Text("Phone Number: \(plan.phoneNumber)")
+            if plan.isActive {
+                Button("Deactivate Plan") {
+                    authViewModel.deactivateSubscription(id: plan.id)
+                }
+                .foregroundColor(.red)
+            } else {
+                Text("This plan is currently inactive.")
+            }
+        }
+        .navigationTitle(plan.planType.rawValue)
     }
 }
 
 struct AllPlansView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-
+    
     var body: some View {
-        List {
-            ForEach(availablePlans, id: \.id) { plan in
-                HStack {
-                    Text(plan.name)
-                    Spacer()
-                    if authViewModel.userSubscription.plans.contains(where: { $0.id == plan.id }) {
-                        Text("Subscribed")
-                            .foregroundColor(.green)
-                    } else {
-                        Button("Subscribe") {
-                            authViewModel.addSubscription(plan: plan)
-                        }
-                        .foregroundColor(Theme.primaryColor)
-                    }
-                }
+        List(authViewModel.availablePlanTypes, id: \.self) { planType in
+            Button("Subscribe to \(planType.rawValue)") {
+                let newPhoneNumber = authViewModel.generatePhoneNumber()
+                authViewModel.addSubscription(planType: planType, phoneNumber: newPhoneNumber)
             }
         }
         .navigationTitle("Available Plans")

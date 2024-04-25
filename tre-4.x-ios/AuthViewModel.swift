@@ -1,32 +1,29 @@
-//
-//  AuthViewModel.swift
-//  tre-4.x-ios
-//
-//  Created by Dilip Kumar Shukla on 2024-04-25.
-//
-
 import SwiftUI
 
 // Define a model for user subscriptions
 struct UserSubscription {
-    let phoneNumber: String
-    var plans: [TelecomPlan] // 'plans' is now a variable
+    var plans: [TelecomPlan]
 }
 
 // Define a model for telecom plans
 struct TelecomPlan: Identifiable {
     let id: UUID
+    var phoneNumber: String
     let name: String
     let dataUsage: String
     let dataLimit: String
     let planType: PlanType
+    var isActive: Bool
     
-    init(id: UUID = UUID(), name: String, dataUsage: String, dataLimit: String, planType: PlanType) {
+    // Generate a new UUID by default if none is provided
+    init(id: UUID = UUID(), phoneNumber: String, name: String, dataUsage: String, dataLimit: String, planType: PlanType, isActive: Bool = true) {
         self.id = id
+        self.phoneNumber = phoneNumber
         self.name = name
         self.dataUsage = dataUsage
         self.dataLimit = dataLimit
         self.planType = planType
+        self.isActive = isActive
     }
 }
 
@@ -37,32 +34,36 @@ enum PlanType: String, CaseIterable {
     case threeFourX = "3.4x"
 }
 
-// Sample data
-let availablePlans = [
-    TelecomPlan(name: "My FLEXi Plan", dataUsage: "10GB", dataLimit: "50GB", planType: .flexi),
-    TelecomPlan(name: "UNLIMITED 5G", dataUsage: "Unlimited", dataLimit: "Unlimited", planType: .unlimited),
-    TelecomPlan(name: "3.4x Advantage", dataUsage: "25GB", dataLimit: "100GB", planType: .threeFourX)
-]
-
 class AuthViewModel: ObservableObject {
     @Published var isLoggedIn = true
-    @Published var userSubscription = UserSubscription(
-        phoneNumber: "+1234567890",
-        plans: [TelecomPlan(id: UUID(), name: "UNLIMITED 5G", dataUsage: "Unlimited", dataLimit: "Unlimited", planType: .unlimited)]
-    )
+    @Published var userSubscription = UserSubscription(plans: [])
+    @Published var availablePlanTypes: [PlanType] = [.flexi, .unlimited, .threeFourX]
 
-    // Mock function to simulate adding a subscription
-    func addSubscription(plan: TelecomPlan) {
-        if !userSubscription.plans.contains(where: { $0.id == plan.id }) {
-            userSubscription.plans.append(plan)
+    init() {
+        // Initialize with a default plan
+        addSubscription(planType: .unlimited, phoneNumber: generatePhoneNumber())
+    }
+    
+    func addSubscription(planType: PlanType, phoneNumber: String) {
+        let newPlan = TelecomPlan(phoneNumber: phoneNumber, name: planType.rawValue, dataUsage: "0GB", dataLimit: planType == .unlimited ? "Unlimited" : "50GB", planType: planType)
+        userSubscription.plans.append(newPlan)
+    }
+
+    func deactivateSubscription(id: UUID) {
+        if let index = userSubscription.plans.firstIndex(where: { $0.id == id }) {
+            userSubscription.plans[index].isActive = false
         }
     }
+
+    func generatePhoneNumber() -> String {
+        let number = (1000000...9999999).randomElement() ?? 1000000
+        return "+4670\(number)"
+    }
+    
     func login() {
-        // Your login logic goes here
-        // For now, we'll just set isLoggedIn to true to simulate a login
         isLoggedIn = true
     }
-    // Mock function to simulate login/logout
+    
     func logout() {
         isLoggedIn = false
     }
